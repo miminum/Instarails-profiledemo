@@ -17,7 +17,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create profile" do
     assert_difference('Profile.count') do
-      post profiles_url, params: { profile: { bio: @profile.bio, name: @profile.name, username: @profile.username } }
+      post profiles_url, params: { profile: { bio: @profile.bio, name: @profile.name, user_id: @profile.user_id, username: @profile.username } }
     end
 
     assert_redirected_to profile_url(Profile.last)
@@ -34,7 +34,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update profile" do
-    patch profile_url(@profile), params: { profile: { bio: @profile.bio, name: @profile.name, username: @profile.username } }
+    patch profile_url(@profile), params: { profile: { bio: @profile.bio, name: @profile.name, user_id: @profile.user_id, username: @profile.username } }
     assert_redirected_to profile_url(@profile)
   end
 

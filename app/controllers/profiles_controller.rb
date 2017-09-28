@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    redirect_to edit_profile_url if @profile.nil?
   end
 
   # GET /profiles/new
@@ -19,6 +20,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    @profile = Profile.find_or_initialize_by(user: current_user)
   end
 
   # POST /profiles
@@ -64,11 +66,11 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = Profile.find_by(user: current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:username, :name, :bio)
+      params.require(:profile).permit(:user_id, :username, :name, :bio)
     end
 end
